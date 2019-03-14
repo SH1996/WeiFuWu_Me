@@ -24,3 +24,23 @@ upstream backserver {  ip_hash;  server 192.168.0.14:88;  server 192.16
 
 然后将proxy_pass后面改为http://backserver；  就ok了
 ```
+4.服务器宕机容错机制（高可用）：一主一备或者多主多备。集群nginx，或者集群nginx代理的ip主机服务器（nginx默认有宕机容错轮训机制），如果nginx备用主机还是宕机，使用keepalive自动重启nginx脚本，n次还是宕机就发送邮箱给运维人员；
+配置代码如下：
+```
+宕机轮训配置规则
+
+    server {
+        listen       80;
+        server_name  www.itmayiedu.com;
+        location / {
+	    proxy_pass  http://backserver;
+	    index  index.html index.htm;
+            # 时间超出一秒之后就自动轮训下一台ip服务器
+	    proxy_connect_timeout 1;
+            proxy_send_timeout 1;
+            proxy_read_timeout 1;
+        }
+		
+	    }
+```
+淘宝架构案例：发送新版本时访问备用主机；大公司一般都是一主一备，其中tomcat发布版本时，session会失效怎么解决？存放到redis中；
