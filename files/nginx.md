@@ -49,7 +49,7 @@ upstream backserver {  ip_hash;  server 192.168.0.14:88;  server 192.16
 ```
 server {
         listen       80;
-        server_name  www.itmayiedu.com;
+        server_name  www.sh.com;
         location /A {
 	    proxy_pass  http://www.a.com;
 	    index  index.html index.htm;
@@ -61,4 +61,4 @@ server {
 		
 }
 ```
-这样它们的域名都是 www. itmayiedu.com 了！ ok
+这样它们的域名都是 ‘www.sh.com’ 了！ ok
