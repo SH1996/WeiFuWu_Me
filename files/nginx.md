@@ -44,3 +44,21 @@ upstream backserver {  ip_hash;  server 192.168.0.14:88;  server 192.16
 	    }
 ```
 淘宝架构案例：发送新版本时访问备用主机；大公司一般都是一主一备，其中tomcat发布版本时，session会失效怎么解决？存放到redis中；
+
+5.nginx解决跨域问题：ajax跨域问题是因为-->请求url的所在域名和ajax请求访问的域名不一致导致不能访问，nginx实现跨域是虚拟出两个同域名主机，请求参数不同来实现的，代码如下：
+```
+server {
+        listen       80;
+        server_name  www.itmayiedu.com;
+        location /A {
+	    proxy_pass  http://www.a.com;
+	    index  index.html index.htm;
+        }
+	location /B {
+	    proxy_pass  http://www.b.com;
+	    index  index.html index.htm;
+        }
+		
+}
+```
+这样它们的域名都是 www. itmayiedu.com 了！ ok
