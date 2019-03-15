@@ -1,1 +1,0 @@
-1.使用idea的开发插件spring Assistant构建三个相互注册的eureka服务的服务端
