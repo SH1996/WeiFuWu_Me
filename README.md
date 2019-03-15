@@ -8,3 +8,5 @@
 [0.小问题记录本](./files/smallProblem.md)
 
 [1.从nginx开始搭建](./files/nginx.md)
+
+[2.搭建eureka服务端集群](./files/eureka-server.md)
